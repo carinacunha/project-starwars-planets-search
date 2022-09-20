@@ -5,7 +5,7 @@ import useFetch from '../hooks/useFetch';
 
 function Provider({ children }) {
   const [planets] = useFetch();
-  // console.log(planets);
+  const [inputName, setInputName] = useState();
   const [planetsList, setPlanetsList] = useState([]);
   const [columns, setColumns] = useState(
     [
@@ -21,11 +21,18 @@ function Provider({ children }) {
     setPlanetsList(planets);
   }, [planets]);
 
+  useEffect(() => {
+    setPlanetsList(planetsList.filter((planet) => (
+      ((planet.name).toLowerCase()).includes(inputName.toLowerCase())
+    )));
+  }, [inputName]);
+
   const context = {
     planets,
     planetsList,
     columns,
     setColumns,
+    setInputName,
   };
 
   return (
