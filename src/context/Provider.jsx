@@ -16,8 +16,8 @@ function Provider({ children }) {
       'surface_water',
     ],
   );
-  const [valueColumn, setValueColumn] = useState('orbital_period');
-  const [valueComparation, setValueComparation] = useState('menor que');
+  const [valueColumn, setValueColumn] = useState('population');
+  const [valueComparation, setValueComparation] = useState('maior que');
   const comparations = ['maior que', 'menor que', 'igual a'];
   const [valueNumber, setValueNumber] = useState('0');
 

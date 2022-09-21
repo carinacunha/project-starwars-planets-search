@@ -46,20 +46,19 @@ function Header() {
     let planetsFiltered = [];
     if (valueComparation === 'maior que') {
       planetsFiltered = planetsList
-        .filter((planet) => planet[valueColumn] !== 'unknown'
+        .filter((planet) => planet[valueColumn] !== 'unspecified'
       && Number(planet[valueColumn]) > Number(valueNumber));
     }
 
     if (valueComparation === 'menor que') {
       planetsFiltered = planetsList
-        .filter((planet) => planet[valueColumn] !== 'unknown'
+        .filter((planet) => planet[valueColumn] !== 'unspecified'
       && Number(planet[valueColumn]) < Number(valueNumber));
     }
 
-    if (valueComparation === 'menor que') {
-      planetsFiltered = planetsList
-        .filter((planet) => planet[valueColumn] !== 'unknown'
-      && Number(planet[valueColumn]) === Number(valueNumber));
+    if (valueComparation === 'igual a') {
+      planetsFiltered = planetsList.filter((planet) => Number(planet[valueColumn])
+      === Number(valueNumber));
     }
     setPlanetsList(planetsFiltered);
   };
