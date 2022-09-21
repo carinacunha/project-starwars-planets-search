@@ -7,7 +7,6 @@ function Header() {
     planetsList,
     setInputName,
     setPlanetsList,
-    columns,
     valueColumn,
     setValueColumn,
     valueComparation,
@@ -15,6 +14,11 @@ function Header() {
     comparations,
     valueNumber,
     setValueNumber,
+    filtersSelected,
+    setFiltersSelected,
+    newsColumns,
+    setNewsColumns,
+    filterInfos,
   } = useContext(GlobalContext);
 
   const handleChange = ({ target }) => {
@@ -25,21 +29,6 @@ function Header() {
       (planet) => planet.name.toLowerCase().includes(name),
     );
     setPlanetsList(filterByName);
-  };
-
-  const handleColumns = ({ target }) => {
-    const { value } = target;
-    setValueColumn(value);
-  };
-
-  const handleComparations = ({ target }) => {
-    const { value } = target;
-    setValueComparation(value);
-  };
-
-  const handleNumber = ({ target }) => {
-    const { value } = target;
-    setValueNumber(value);
   };
 
   const handleClickFilter = () => {
@@ -61,6 +50,10 @@ function Header() {
       === Number(valueNumber));
     }
     setPlanetsList(planetsFiltered);
+    const newOptions = newsColumns.filter((option) => option !== valueColumn);
+    setFiltersSelected([...filtersSelected, filterInfos]);
+    setNewsColumns(newOptions);
+    setValueColumn(newOptions[0]);
   };
 
   return (
@@ -78,13 +71,13 @@ function Header() {
             <select
               data-testid="column-filter"
               value={ valueColumn }
-              onChange={ handleColumns }
+              onChange={ ({ target: { value } }) => setValueColumn(value) }
             >
               {
-                columns.map((col) => (
+                newsColumns.map((col, index) => (
                   <option
                     value={ col }
-                    key={ col }
+                    key={ index }
                   >
                     {col}
                   </option>
@@ -97,7 +90,7 @@ function Header() {
             <select
               data-testid="comparison-filter"
               value={ valueComparation }
-              onChange={ handleComparations }
+              onChange={ ({ target: { value } }) => setValueComparation(value) }
             >
               {
                 comparations.map((comp, index) => (
@@ -118,7 +111,7 @@ function Header() {
               type="number"
               min="0"
               value={ valueNumber }
-              onChange={ handleNumber }
+              onChange={ ({ target: { value } }) => setValueNumber(value) }
             />
           </legend>
         </section>
@@ -130,6 +123,19 @@ function Header() {
       >
         Filtrar
       </button>
+      {
+        filtersSelected.map((filter, index) => (
+          <section key={ index }>
+            <p>
+              {
+                `${filter.valueColumn} 
+                ${filter.valueComparation} 
+                ${filter.valueNumber}`
+              }
+            </p>
+          </section>
+        ))
+      }
     </header>
   );
 }

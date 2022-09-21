@@ -20,6 +20,13 @@ function Provider({ children }) {
   const [valueComparation, setValueComparation] = useState('maior que');
   const comparations = ['maior que', 'menor que', 'igual a'];
   const [valueNumber, setValueNumber] = useState('0');
+  const [filtersSelected, setFiltersSelected] = useState([]);
+  const [newsColumns, setNewsColumns] = useState(columns);
+  const filterInfos = {
+    valueColumn,
+    valueComparation,
+    valueNumber,
+  };
 
   useEffect(() => {
     setPlanetsList(planets);
@@ -40,6 +47,11 @@ function Provider({ children }) {
     comparations,
     valueNumber,
     setValueNumber,
+    filterInfos,
+    filtersSelected,
+    setFiltersSelected,
+    newsColumns,
+    setNewsColumns,
 
   };
 
