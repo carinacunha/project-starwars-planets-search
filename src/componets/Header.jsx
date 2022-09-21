@@ -2,12 +2,17 @@ import React, { useContext } from 'react';
 import GlobalContext from '../context/GlobalContext';
 
 function Header() {
-  const { setInputName, inputName } = useContext(GlobalContext);
+  const { setInputName, planets, setPlanetsList } = useContext(GlobalContext);
 
   const handleChange = ({ target }) => {
     const { value } = target;
-    setInputName(value);
-    console.log(value);
+    const name = value.toLowerCase();
+    setInputName(name);
+    const filterByName = planets.filter(
+      (planet) => planet.name.toLowerCase().includes(name),
+    );
+
+    setPlanetsList(filterByName);
   };
 
   return (
@@ -19,7 +24,6 @@ function Header() {
             type="text"
             placeholder="Digite o nome do planeta"
             onChange={ handleChange }
-            value={ inputName }
           />
         </section>
       </form>

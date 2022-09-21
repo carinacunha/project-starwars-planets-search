@@ -3,7 +3,6 @@ import GlobalContext from '../context/GlobalContext';
 
 export default function Table() {
   const { planetsList } = useContext(GlobalContext);
-  console.log(planetsList);
 
   return (
     <div>

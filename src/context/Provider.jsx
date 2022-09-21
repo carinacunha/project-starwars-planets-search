@@ -5,39 +5,24 @@ import useFetch from '../hooks/useFetch';
 
 function Provider({ children }) {
   const [planets] = useFetch();
-  const [inputName, setInputName] = useState();
+  const [inputName, setInputName] = useState('');
   const [planetsList, setPlanetsList] = useState([]);
-  const [columns, setColumns] = useState(
-    [
-      'population',
-      'orbital_period',
-      'diameter',
-      'rotation_period',
-      'surface_water',
-    ],
-  );
 
   useEffect(() => {
     setPlanetsList(planets);
   }, [planets]);
 
-  useEffect(() => {
-    setPlanetsList(planetsList.filter((planet) => (
-      ((planet.name).toLowerCase()).includes(inputName.toLowerCase())
-    )));
-  }, [inputName]);
-
   const context = {
     planets,
     planetsList,
-    columns,
-    setColumns,
     setInputName,
+    inputName,
+    setPlanetsList,
   };
 
   return (
     <GlobalContext.Provider value={ context }>
-      {children}
+      { children }
     </GlobalContext.Provider>
   );
 }
