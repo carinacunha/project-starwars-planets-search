@@ -10,8 +10,6 @@ const SELECT_COL = 'column-filter';
 const SELECT_COMP = 'comparison-filter';
 const INPUT_VAL = 'value-filter';
 const COMPONENTS = [INPUT_NAME, SELECT_COL, SELECT_COMP, INPUT_VAL];
-const TITLES = ['Name', 'Rotation Period', 'Orbital Period', 'Diameter', 'Climate', 'Garvity',
-'Terrain', 'Surface Water', 'Population', 'Films', 'Created', 'Edited', 'URl'];
 
 describe('Verifica se a App é funcional', () => {
 
@@ -65,7 +63,7 @@ describe('Verifica se a App é funcional', () => {
     ));
   });
 
-  test('Verifica se as categorias não se repetem no filtro', async () => {
+  test("Verifica se multiplos filtros funcionam", async () => {
     const { getAllByTestId } = render(<App />);
 
     const columnValue = screen.getByTestId(SELECT_COL);
@@ -111,7 +109,7 @@ describe('Verifica se a App é funcional', () => {
 
   });
 
-  test('', async () => {
+  test("Verifica se os filtro 'igual a' funciona", async () => {
     const { getAllByTestId } = render(<App />);
 
     const columnValue = screen.getByTestId(SELECT_COL);
@@ -130,7 +128,7 @@ describe('Verifica se a App é funcional', () => {
 
   });
 
-  test('', async () => {
+  test("Verifica se os filtro 'maior que' funciona", async () => {
     const { getAllByTestId } = render(<App />);
 
     const columnValue = screen.getByTestId(SELECT_COL);
@@ -148,7 +146,7 @@ describe('Verifica se a App é funcional', () => {
 
   });
 
-  test('', async () => {
+  test("Verifica se os filtro 'maior que' funciona", async () => {
     const { getAllByTestId } = render(<App />);
 
     const columnValue = screen.getByTestId(SELECT_COL);
