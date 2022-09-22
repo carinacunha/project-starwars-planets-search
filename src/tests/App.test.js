@@ -64,4 +64,105 @@ describe('Verifica se a App é funcional', () => {
       expect(screen.getByRole('option', { name: option })).toBeInTheDocument()
     ));
   });
+
+  test('Verifica se as categorias não se repetem no filtro', async () => {
+    const { getAllByTestId } = render(<App />);
+
+    const columnValue = screen.getByTestId(SELECT_COL);
+    const comparisonValue = screen.getByTestId(SELECT_COMP);
+    const value = screen.getByTestId(INPUT_VAL);
+    const btnFilter = screen.getByTestId('button-filter');
+
+    userEvent.type(value, '200000');
+    userEvent.click(btnFilter);
+
+    userEvent.selectOptions(columnValue, 'diameter');
+    userEvent.selectOptions(comparisonValue, 'menor que');
+    userEvent.clear(value);
+
+    userEvent.type(value, '10000');
+    userEvent.click(btnFilter);
+    expect(getAllByTestId('planet').length).toBe(1);
+
+  });
+
+  test('Ao clica no botão de todos os filtros são apagados', async () => {
+    const { getAllByTestId } = render(<App />);
+
+    const columnValue = screen.getByTestId(SELECT_COL);
+    const comparisonValue = screen.getByTestId(SELECT_COMP);
+    const value = screen.getByTestId(INPUT_VAL);
+    const btnFilter = screen.getByTestId('button-filter');
+    const btnremovefilter = screen.getByTestId('button-remove-filters');
+
+    userEvent.type(value, '10');
+    userEvent.click(btnFilter);
+
+    userEvent.selectOptions(columnValue, 'diameter');
+    userEvent.selectOptions(comparisonValue, 'menor que');
+    userEvent.clear(value);
+
+    userEvent.type(value, '10000');
+    userEvent.click(btnFilter);
+
+    userEvent.click(btnremovefilter);
+
+    expect(screen.getAllByTestId('planet').length).toBe(10);
+
+  });
+
+  test('', async () => {
+    const { getAllByTestId } = render(<App />);
+
+    const columnValue = screen.getByTestId(SELECT_COL);
+    const comparisonValue = screen.getByTestId(SELECT_COMP);
+    const value = screen.getByTestId(INPUT_VAL);
+    const btnFilter = screen.getByTestId('button-filter');
+    const btnremovefilter = screen.getByTestId('button-remove-filters');
+
+    userEvent.selectOptions(columnValue, 'rotation_period');
+    userEvent.selectOptions(comparisonValue, 'igual a');
+    userEvent.type(value, '23');
+
+    userEvent.click(btnFilter);
+
+    expect(await screen.findByText(/Tatooine/i)).toBeInTheDocument();
+
+  });
+
+  test('', async () => {
+    const { getAllByTestId } = render(<App />);
+
+    const columnValue = screen.getByTestId(SELECT_COL);
+    const comparisonValue = screen.getByTestId(SELECT_COMP);
+    const value = screen.getByTestId(INPUT_VAL);
+    const btnFilter = screen.getByTestId('button-filter');
+
+    userEvent.selectOptions(columnValue, 'rotation_period');
+    userEvent.selectOptions(comparisonValue, 'maior que');
+    userEvent.type(value, '26');
+
+    userEvent.click(btnFilter);
+
+    expect(await screen.findByText(/Kamino/i)).toBeInTheDocument();
+
+  });
+
+  test('', async () => {
+    const { getAllByTestId } = render(<App />);
+
+    const columnValue = screen.getByTestId(SELECT_COL);
+    const comparisonValue = screen.getByTestId(SELECT_COMP);
+    const value = screen.getByTestId(INPUT_VAL);
+    const btnFilter = screen.getByTestId('button-filter');
+
+    userEvent.selectOptions(columnValue, 'rotation_period');
+    userEvent.selectOptions(comparisonValue, 'menor que');
+    userEvent.type(value, '13');
+
+    userEvent.click(btnFilter);
+
+    expect(await screen.findByText(/Bespin/i)).toBeInTheDocument();
+
+  });
 });

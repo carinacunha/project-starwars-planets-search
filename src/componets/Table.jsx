@@ -24,9 +24,9 @@ function Table() {
             <th className="headTable">Url</th>
           </tr>
         </thead>
-        <tbody>
-          {planetsList !== undefined ? (
-            planetsList.map(({
+        <tbody data-testid="planet">
+          {planetsList?.map((
+            {
               name,
               rotation_period: rotationPeriod,
               orbital_period: orbitalPeriod,
@@ -40,26 +40,27 @@ function Table() {
               created,
               edited,
               url,
-            }) => (
-              <tr key={ name } className="tr">
-                <td className="contentTable">{name}</td>
-                <td className="contentTable">{rotationPeriod}</td>
-                <td className="contentTable">{orbitalPeriod}</td>
-                <td className="contentTable">{diameter}</td>
-                <td className="contentTable">{climate}</td>
-                <td className="contentTable">{gravity}</td>
-                <td className="contentTable">{terrain}</td>
-                <td className="contentTabled">{surfaceWater}</td>
-                <td className="contentTable">{population}</td>
-                <td className="contentTable">{films}</td>
-                <td className="contentTable">{created}</td>
-                <td className="contentTable">{edited}</td>
-                <td className="contentTable">{url}</td>
-              </tr>
-            ))
-          ) : (
-            <tr>{}</tr>
-          )}
+            },
+          ) => (
+            <tr
+              key={ name }
+              className="tr"
+            >
+              <td className="contentTable">{name}</td>
+              <td className="contentTable">{rotationPeriod}</td>
+              <td className="contentTable">{orbitalPeriod}</td>
+              <td className="contentTable">{diameter}</td>
+              <td className="contentTable">{climate}</td>
+              <td className="contentTable">{gravity}</td>
+              <td className="contentTable">{terrain}</td>
+              <td className="contentTabled">{surfaceWater}</td>
+              <td className="contentTable">{population}</td>
+              <td className="contentTable">{films}</td>
+              <td className="contentTable">{created}</td>
+              <td className="contentTable">{edited}</td>
+              <td className="contentTable">{url}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

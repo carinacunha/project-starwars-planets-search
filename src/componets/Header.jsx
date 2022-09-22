@@ -135,6 +135,16 @@ function Header() {
           </section>
         ))
       }
+      <button
+        data-testid="button-remove-filters"
+        type="button"
+        onClick={ () => {
+          setFiltersSelected([]);
+          setPlanetsList(planets);
+        } }
+      >
+        Remover todas filtragens
+      </button>
     </header>
   );
 }
