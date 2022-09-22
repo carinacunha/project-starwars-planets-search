@@ -16,8 +16,8 @@ function Header() {
     setValueNumber,
     filtersSelected,
     setFiltersSelected,
-    visibleOptions,
-    setVisibleOptions,
+    newsColumns,
+    setNewsColumns,
     filterInfos,
   } = useContext(GlobalContext);
 
@@ -31,38 +31,27 @@ function Header() {
     setPlanetsList(filterByName);
   };
 
-  const tableFilter = (filterData) => {
-    const { valueColumn, valueComparation, valueNumber } = filterData;
+  const handleClickFilter = () => {
     let planetsFiltered = [];
     if (valueComparation === 'maior que') {
       planetsFiltered = planetsList
-        .filter((planet) => planet[valueCol] !== 'unknown'
-        && Number(planet[valueColumn]) > Number(valueNumber));
+        .filter((planet) => planet[valueColumn] !== 'unknown'
+      && Number(planet[valueColumn]) > Number(valueNumber));
     }
-
     if (valueComparation === 'menor que') {
       planetsFiltered = planetsList
-        .filter((planet) => planet[valueCol] !== 'unknown'
-        && Number(planet[valueColumn]) < Number(valueNumber));
+        .filter((planet) => planet[valueColumn] !== 'unknown'
+      && Number(planet[valueColumn]) < Number(valueNumber));
     }
-
     if (valueComparation === 'igual a') {
       planetsFiltered = planetsList.filter((planet) => Number(planet[valueColumn])
       === Number(valueNumber));
     }
-    return planetsFiltered;
-  };
-
-  const handleClickFilter = () => {
-    const newTable = tableFilter(filterInfos);
-    setPlanetsList(newTable);
-
-    const newOptions = visibleOptions.filter((option) => option !== valueColumn);
+    setPlanetsList(planetsFiltered);
+    const newOptions = newsColumns.filter((option) => option !== valueColumn);
     setFiltersSelected([...filtersSelected, filterInfos]);
-    setVisibleOptions(newOptions);
+    setNewsColumns(newOptions);
     setValueColumn(newOptions[0]);
-
-    filtersSelected.forEach((elem) => tableFilter(elem));
   };
 
   return (
@@ -83,7 +72,7 @@ function Header() {
               onChange={ ({ target: { value } }) => setValueColumn(value) }
             >
               {
-                visibleOptions.map((col, index) => (
+                newsColumns.map((col, index) => (
                   <option
                     value={ col }
                     key={ index }
@@ -94,6 +83,7 @@ function Header() {
               }
             </select>
           </legend>
+
           <legend>
             Intervalo
             <select
@@ -132,42 +122,20 @@ function Header() {
       >
         Filtrar
       </button>
-
       {
-        filtersSelected.map((elem) => (
-          <section
-            data-testid="filter"
-            key={ elem.valueColumn }
-          >
+        filtersSelected.map((filter, index) => (
+          <section key={ index }>
             <p>
               {
-                `${elem.valueColumn} 
-                ${elem.valueComparation} 
-                ${elem.valueNumber}`
+                `${filter.valueColumn} 
+                ${filter.valueComparation} 
+                ${filter.valueNumber}`
               }
             </p>
-            <button
-              type="button"
-              name={ elem.valueColumn }
-            >
-              Remover filtro
-            </button>
           </section>
         ))
       }
-      <button
-        data-testid="button-remove-filters"
-        type="button"
-        onClick={ () => {
-          setFiltersSelected([]);
-          setPlanetsList(planets);
-        } }
-      >
-        Remover todas filtragens
-      </button>
-
     </header>
   );
 }
-
 export default Header;
