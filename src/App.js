@@ -7,6 +7,7 @@ import Header from './componets/Header';
 function App() {
   return (
     <Provider>
+      <h1> Projeto StarWars - Trybe </h1>
       <Header />
       <Table />
     </Provider>

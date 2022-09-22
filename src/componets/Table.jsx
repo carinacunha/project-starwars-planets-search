@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import GlobalContext from '../context/GlobalContext';
 
-export default function Table() {
+function Table() {
   const { planetsList } = useContext(GlobalContext);
 
   return (
@@ -65,3 +65,5 @@ export default function Table() {
     </div>
   );
 }
+
+export default Table;

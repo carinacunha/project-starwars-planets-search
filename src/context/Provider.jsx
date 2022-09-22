@@ -5,6 +5,7 @@ import useFetch from '../hooks/useFetch';
 
 function Provider({ children }) {
   const [planets] = useFetch();
+  // console.log(planets);
   const [planetsList, setPlanetsList] = useState([]);
   const [inputName, setInputName] = useState('');
   const [columns, setColumns] = useState(
@@ -21,7 +22,8 @@ function Provider({ children }) {
   const comparations = ['maior que', 'menor que', 'igual a'];
   const [valueNumber, setValueNumber] = useState('0');
   const [filtersSelected, setFiltersSelected] = useState([]);
-  const [newsColumns, setNewsColumns] = useState(columns);
+  const [visibleOptions, setVisibleOptions] = useState(columns);
+  const [workTable, setWorkTable] = useState([]);
   const filterInfos = {
     valueColumn,
     valueComparation,
@@ -50,9 +52,10 @@ function Provider({ children }) {
     filterInfos,
     filtersSelected,
     setFiltersSelected,
-    newsColumns,
-    setNewsColumns,
-
+    visibleOptions,
+    setVisibleOptions,
+    workTable,
+    setWorkTable,
   };
 
   return (
