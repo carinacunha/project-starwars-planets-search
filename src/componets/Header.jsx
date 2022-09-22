@@ -16,8 +16,8 @@ function Header() {
     setValueNumber,
     filtersSelected,
     setFiltersSelected,
-    newsColumns,
-    setNewsColumns,
+    visibleColumns,
+    setVisibleColumns,
     filterInfos,
   } = useContext(GlobalContext);
 
@@ -48,9 +48,9 @@ function Header() {
       === Number(valueNumber));
     }
     setPlanetsList(planetsFiltered);
-    const newOptions = newsColumns.filter((option) => option !== valueColumn);
+    const newOptions = visibleColumns.filter((option) => option !== valueColumn);
     setFiltersSelected([...filtersSelected, filterInfos]);
-    setNewsColumns(newOptions);
+    setVisibleColumns(newOptions);
     setValueColumn(newOptions[0]);
   };
 
@@ -72,7 +72,7 @@ function Header() {
               onChange={ ({ target: { value } }) => setValueColumn(value) }
             >
               {
-                newsColumns.map((col, index) => (
+                visibleColumns.map((col, index) => (
                   <option
                     value={ col }
                     key={ index }

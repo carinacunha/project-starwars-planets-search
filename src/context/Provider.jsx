@@ -21,7 +21,7 @@ function Provider({ children }) {
   const comparations = ['maior que', 'menor que', 'igual a'];
   const [valueNumber, setValueNumber] = useState('0');
   const [filtersSelected, setFiltersSelected] = useState([]);
-  const [newsColumns, setNewsColumns] = useState(columns);
+  const [visibleColumns, setVisibleColumns] = useState(columns);
   const filterInfos = {
     valueColumn,
     valueComparation,
@@ -49,8 +49,8 @@ function Provider({ children }) {
     filterInfos,
     filtersSelected,
     setFiltersSelected,
-    newsColumns,
-    setNewsColumns,
+    visibleColumns,
+    setVisibleColumns,
 
   };
 
